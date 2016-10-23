@@ -1,0 +1,7 @@
+--Dirigirse al vitual del proyecto
+ cd.. [ubicar carpeta]
+ cd -> Scripts
+ activate
+--Dirigirse al proyecto
+ cd.. [ubicar proyecto]
+ manage.py runserver
