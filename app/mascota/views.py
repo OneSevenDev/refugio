@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.core.urlresolvers import reverse_lazy
+from django.core import serializers
 from app.mascota.form import MascotaForm
 from app.mascota.models import Mascota
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
 
 # Create your views here.
+def listado(req):
+    lista = serializers.serialize('json', Mascota.objects.all(),
+                                  fields=['nombre', 'sexo', 'edad_aproximada', 'fecha_rescate'])
+    return HttpResponse(lista, content_type='application/json')
+
 def index(req):
     return render(req, 'mascotas/index.html')
 
@@ -47,6 +53,7 @@ def mascota_delete(req, id_mascota):
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascotas/mascotas_list.html'
+    paginate_by = 2
 
 class MascotaCreate(CreateView):
     model = Mascota
