@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <form action="" method="post" class="form-group">
+        {% csrf_token %}
+{#        <h3>¿Desea eliminar el registro de {{ mascota.nombre }}?</h3>#}
+        <h3>¿Desea eliminar el registro de {{ object.persona.nombre }} {{ object.persona.apellidos }}?</h3>
+        <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+        <a class="btn btn-default" href="{% url 'adopcion:solicitud_listar' %}">Cancelar</a>
+    </form>
+{% endblock %}
